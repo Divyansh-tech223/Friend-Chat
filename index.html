@@ -3,126 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discord Lite</title>
-    <style>
-        /* --- 1. CSS STYLING --- */
-        
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #36393f; /* Main Discord Background */
-            color: white;
-            height: 100vh;
-            display: flex; /* Aligns Sidebar and Chat side-by-side */
-            overflow: hidden;
-        }
-
-        /* Sidebar Styling */
-        .sidebar {
-            width: 250px;
-            background-color: #2f3136; /* Darker Sidebar */
-            display: flex;
-            flex-direction: column;
-            padding: 10px;
-        }
-
-        .channel {
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 4px;
-            color: #8e9297;
-            margin-bottom: 2px;
-        }
-
-        .channel:hover, .channel.active {
-            background-color: #393c43;
-            color: white;
-        }
-
-        /* Main Chat Area */
-        .chat-container {
-            flex: 1; /* Takes up remaining width */
-            display: flex;
-            flex-direction: column;
-            background-color: #36393f;
-        }
-
-        /* Chat Header */
-        .chat-header {
-            padding: 15px;
-            border-bottom: 1px solid #202225;
-            box-shadow: 0 1px 0 rgba(0,0,0,.06);
-            font-weight: bold;
-        }
-
-        /* Messages Area */
-        .messages {
-            flex: 1; /* Takes up remaining height */
-            overflow-y: auto; /* Allows scrolling */
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        /* Individual Message Styling */
-        .message {
-            display: flex;
-            gap: 15px;
-        }
-
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #7289da; /* Discord Blurple */
-        }
-
-        .message-content h4 {
-            color: white;
-            font-size: 1rem;
-            margin-bottom: 5px;
-        }
-
-        .message-content h4 span {
-            color: #72767d;
-            font-size: 0.75rem;
-            margin-left: 5px;
-            font-weight: normal;
-        }
-
-        .message-content p {
-            color: #dcddde;
-        }
-
-        /* Input Area */
-        .input-area {
-            padding: 20px;
-            background-color: #36393f;
-        }
-
-        .input-wrapper {
-            background-color: #40444b;
-            padding: 10px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-        }
-
-        #messageInput {
-            background: transparent;
-            border: none;
-            color: white;
-            width: 100%;
-            outline: none;
-            font-size: 1rem;
-        }
-    </style>
+    <title>Friend Chat</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -138,15 +20,7 @@
             # general
         </div>
 
-        <div class="messages" id="messageContainer">
-            <div class="message">
-                <div class="avatar"></div>
-                <div class="message-content">
-                    <h4>Gemini <span>Today at 12:00 PM</span></h4>
-                    <p>Welcome to your new chat app! Type a message below.</p>
-                </div>
-            </div>
-        </div>
+        <div class="messages" id="messageContainer"></div>
 
         <div class="input-area">
             <div class="input-wrapper">
@@ -155,48 +29,6 @@
         </div>
     </div>
 
-    <script>
-        const input = document.getElementById('messageInput');
-        const messageContainer = document.getElementById('messageContainer');
-
-        // Function to create a new message
-        function sendMessage() {
-            const text = input.value.trim(); // Get text and remove whitespace
-
-            if (text !== "") {
-                // 1. Create the message HTML structure dynamically
-                const newMessage = document.createElement('div');
-                newMessage.classList.add('message');
-                
-                // Get current time
-                const now = new Date();
-                const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-                newMessage.innerHTML = `
-                    <div class="avatar" style="background-color: #faa61a"></div>
-                    <div class="message-content">
-                        <h4>User <span>Today at ${timeString}</span></h4>
-                        <p>${text}</p>
-                    </div>
-                `;
-
-                // 2. Append to the chat window
-                messageContainer.appendChild(newMessage);
-
-                // 3. Auto-scroll to the bottom
-                messageContainer.scrollTop = messageContainer.scrollHeight;
-
-                // 4. Clear the input
-                input.value = "";
-            }
-        }
-
-        // Listen for the "Enter" key
-        input.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
